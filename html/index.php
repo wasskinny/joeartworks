@@ -1,4 +1,5 @@
 <html>
+	<head>
 	
 	<!-- My Styles -->
 	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
@@ -13,6 +14,9 @@
 	<script type="text/javascript">
 		$("[data-fancybox]").fancybox({ });
 	</script>
+	</head>
+	<body>
+		<p>Hello World</p>
 	
 	<div class="container">
 		<div class="gallery">
@@ -41,4 +45,5 @@
 				} ?>
 		</div>
 	</div>
+	</body>
 </html>
