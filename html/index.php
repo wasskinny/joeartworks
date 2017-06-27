@@ -1,7 +1,7 @@
 <html>
 	
 	<!-- My Styles -->
-	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
 	
 	<!-- fancybox CSS Library -->
 	<link rel="stylesheet" type="text/css" href="fancybox/dist/jquery.fancybox.css" />
