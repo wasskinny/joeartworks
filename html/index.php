@@ -2,7 +2,7 @@
 	<head>
 	
 	<!-- My Styles -->
-	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	
 	<!-- fancybox CSS Library -->
 	<link rel="stylesheet" type="text/css" href="fancybox/dist/jquery.fancybox.css" />
@@ -16,14 +16,13 @@
 	</script>
 	</head>
 	<body>
-		<p>Hello World</p>
 	
 	<div class="container">
 		<div class="gallery">
 			<?php
 				
 				//Include database configuration file
-				include('../configs/dbConfig.php');
+				include('configs/dbConfig.php');
 				
 				//Get images from database
 				$query = $db->query(
@@ -45,5 +44,6 @@
 				} ?>
 		</div>
 	</div>
+	
 	</body>
 </html>
