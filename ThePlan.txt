@@ -1,0 +1,8 @@
+Admin Section
+	Add Photos (I want to add photos first so we can add multiple photos)
+	Edit Photos 
+		Edit the quantity of photos, descriptions, Titles and Dates
+		Separate database in table linked to the images table
+	Add User
+	Edit User
+		Not sure about this yet.

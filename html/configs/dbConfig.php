@@ -4,7 +4,7 @@
 	// Database Details
 	global $db;
 	$dbHost = "localhost";
-	$dbUsername = "joesartworks";
+	$dbUsername = "joeartworks";
 	$dbPassword = "-B9%zd!!A%;B:lz";
 	$dbName = "joesartworks";
 	
