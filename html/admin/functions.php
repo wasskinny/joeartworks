@@ -16,6 +16,17 @@
 		document.getElementById('addOnePhoto').style.display = "none";
 	}
 	
+	function photomodal($photocount) {
+		$modalID = $photocount;
+		document.getElementById($modalID).style.display = "block";
+	}
+	
+	function closePhotoModal($photocount) {
+		$modalID = $photocount;
+		document.getElementById($modalID).style.display = "none";
+	}
+	
+	
 	
 	
 		

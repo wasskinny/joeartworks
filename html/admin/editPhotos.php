@@ -3,6 +3,8 @@
 	
 	<?php
 		include 'head.php';
+		include '../configs/dbConfig.php';
+		include '../configs/siteSet.php';
 	?>
 	
 	<body>
@@ -19,7 +21,60 @@
 				<button class="<?php echo $adminHeaderButtonClass ?>" onclick="w3_open()">&#9776;</button>
 				<div class="w3-container">
 					<h1>Edit Photo Gallery</h1>
-					<p>Add stuff here....</p>
+				</div>
+			</div>
+			<div class="w3-container"
+				<div class="w3-container">	
+					<?php
+
+						// Query database
+						$sqlFind = 'SELECT `img_name` FROM `images`';
+						$result = mysqli_query($db, $sqlFind);
+						$dbase = []; // create empty array
+		
+						while ($row = mysqli_fetch_row($result))
+							array_push($dbase, $row[0]);
+		
+							// Check files
+							$files1 = scandir($path_to_thumbs, 1);
+							$files2 = scandir($path_to_images, 1);
+							$ignore = Array(".","..",".DS_Store");
+							
+							if ( $files1 !== false ) {
+								foreach ($files1 as $i => $value) {
+									
+									if (in_array($value, $dbase)) {
+										
+									echo $value . " Is in the database and the thumb directory <br/>";
+        						
+        							} else {
+										if (!in_array($value, $ignore)) {
+										echo $value . " Is not in the database <br/>";
+										unlink ($path_to_thumbs.$value);
+										}
+        						    }
+    							}
+								} else {
+									echo 0;
+								}
+							if ( $files2 !== false ) {
+								foreach ($files2 as $j => $value2) {
+									
+									if (in_array($value2, $dbase)) {
+										echo $value2 . " Is in the database and the Images directory <br />";
+									} else {
+										if (!in_array($value2, $ignore)) {
+											echo $value2 . " Is not in the database... removing from directory <br />";
+											unlink ($path_to_images.$value2);
+										}
+									} 
+								} 
+								} else {
+									echo 0;
+								}
+												
+					?>
+					
 				</div>
 			</div>
 		</div>
