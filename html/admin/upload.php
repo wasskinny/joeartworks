@@ -31,8 +31,8 @@ class Upload {
 									$msg .= "<p class='msg_error'>Failed to upload <strong>" . $filename . "</strong>.</p>";
 								} else {
 									$sql = "INSERT INTO images (img_name, description, original) VALUES ('$filename', '$file_name', '1') ";
-									$result = $db->query($sql);
-									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>" ;
+									$result = $db->mysqli_query($sql);
+									$msg .= "<p class='msg_success'><strong>" . $file_name . "</strong> uploaded successfully.</p>" ;
 
 									$magicianObj = new imageLib($filepath);
 									$magicianObj->resizeImage(100, 100);
