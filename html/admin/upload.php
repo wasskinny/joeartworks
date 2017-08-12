@@ -30,11 +30,10 @@ class Upload {
 								if (!move_uploaded_file($_FILES["img_files"]["tmp_name"][$i], $filepath)) {
 									$msg .= "<p class='msg_error'>Failed to upload <strong>" . $filename . "</strong>.</p>";
 								} else {
-									$sql = "INSERT INTO images (`img_name`) VALUES ('$filename') ";
+									$sql = "INSERT INTO images (img_name, original) VALUES ('$filename', '1') ";
 									$result = $db->query($sql);
-									echo $result . " DB Result <br />";
 									echo '<script>console.log('.$result.')</script>';
-									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>";
+									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>" . $result ;
 
 									$magicianObj = new imageLib($filepath);
 									$magicianObj->resizeImage(100, 100);
