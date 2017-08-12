@@ -105,6 +105,55 @@
 					?>
 					
 				</div>
+				<div class="w3-container">
+					<!-- Image Gallery for Editing Images and Quantities -->
+					<!-- Add photos pulls images from thumb directory and links to full
+						This gallery and slideshow will be pulled from the database -->
+						
+					<?php
+						
+						$sqlImages =  "SELECT * FROM images ";
+						$sqlImages .= "LEFT JOIN categories on images.category_id=categories.id";
+						$sqlImages .= ";";
+						
+						$sqlLoadImages = mysqli_query($db, $sqlImages);
+						$imageCount = 0;
+						
+						while ($row = mysqli_fetch_array($sqlLoadImages,MYSQLI_ASSOC)) {
+							
+								$imgID = $row["id"];
+								$imgName = $row["img_name"];
+								$imgDescription = $row["description"];
+								$imgCategory = $row["category"];
+											
+								if($imageCount%4 == 0) {
+										echo '<div class="w3-row-padding w3-margin-top">';
+									}
+											
+									echo '<div class="w3-quarter">';
+									echo '<div class="w3-card-4 w3-center">';										
+									echo "<img src='".$path_to_thumbs.$imgName."' class='middle' alt='" . $imgDescription . "' onclick='photomodal(".$imgID.")' class='w3-hover-opacity' /><br />";
+									echo "<span class='w3-small'>$imgDescription</span>";
+									echo "</div>";
+									echo '<div id="'.$imgID.'" class="w3-modal w3-animate-zoom" onclick="closePhotoModal('.$imgID.')" align="center">';
+									echo "<img class='w3-modal-content' src='" . $path_to_images.$imgName."' />";
+									echo '</div>';
+									echo '</div>';
+											
+								if($imageCount%4 == 3) {
+										echo "</div>";
+									}
+											
+								$imageCount++;
+																											
+						}	
+							
+						
+							
+					?>
+					
+					
+				</div>
 			</div>
 		</div>
 		
