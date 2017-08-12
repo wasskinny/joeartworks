@@ -23,7 +23,7 @@ class Upload {
 					$file_type = $_FILES["img_files"]["type"][$i];
 					$file_size = $_FILES["img_files"]["size"][$i];
 					if( isset($file_name) && $file_name != "") {
-						//if($this->file_size($file_size, $max_upload_size)){
+						if($this->file_size($file_size, $max_upload_size)){
 							if($this->file_extension($file_type)){
 								$filename = time() . '_' . $file_name;
 								$filepath = $folderName . $filename;
@@ -32,6 +32,7 @@ class Upload {
 								} else {
 									$sql = "INSERT INTO images (img_name) VALUES ('$filename') ";
 									$result = $db->query($sql);
+									echo '<script>console.log('.$result.')</script>';
 									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>";
 
 									$magicianObj = new imageLib($filepath);
@@ -41,9 +42,9 @@ class Upload {
 							}else{
 								$msg .= "<p class='msg_error'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</p>";
 							}
-						//}else{
-						//	$msg .= "<p class='msg_error'>Uploaded image size is too large, please upload image less then ".intval($max_upload_size)."Mb.</p>";
-						//}
+						}else{
+							$msg .= "<p class='msg_error'>Uploaded image size is too large, please upload image less then ".intval($max_upload_size)."Mb.</p>";
+						}
 					}
 				}
 			} else {
