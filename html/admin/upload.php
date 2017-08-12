@@ -32,6 +32,7 @@ class Upload {
 								} else {
 									$sql = "INSERT INTO images (img_name) VALUES ('$filename') ";
 									$result = $db->query($sql);
+									echo $result . " DB Result <br />";
 									echo '<script>console.log('.$result.')</script>';
 									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>";
 
