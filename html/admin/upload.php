@@ -32,7 +32,7 @@ class Upload {
 								} else {
 									$sqlUpload = "INSERT INTO images (img_name, description, original) VALUES ('$filename', '$file_name', '1') ";
 									$result = mysqli_query($db, $sqlUpload);
-									printf("Errormessage: %s\n", $result->error);
+									
 									$msg .= "<p class='msg_success'><strong>" . $file_name . "</strong> uploaded successfully.</p>" ;
 
 									$magicianObj = new imageLib($filepath);
