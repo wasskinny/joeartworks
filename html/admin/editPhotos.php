@@ -24,7 +24,8 @@
 				</div>
 			</div>
 			<div class="w3-container"
-				<div class="w3-container">	
+				<div class="w3-container">
+					
 					<?php
 
 						// Query database
@@ -40,12 +41,13 @@
 							$files2 = scandir($path_to_images, 1);
 							$ignore = Array(".","..",".DS_Store");
 							
+							// Check for Thumbnails in Database
 							if ( $files1 !== false ) {
 								foreach ($files1 as $i => $value) {
 									
 									if (in_array($value, $dbase)) {
 										
-									echo $value . " Is in the database and the thumb directory <br/>";
+									// echo $value . " Is in the database and the thumb directory <br/>";
         						
         							} else {
 										if (!in_array($value, $ignore)) {
@@ -57,11 +59,12 @@
 								} else {
 									echo 0;
 								}
+							// Check for Images in Database	
 							if ( $files2 !== false ) {
 								foreach ($files2 as $j => $value2) {
 									
 									if (in_array($value2, $dbase)) {
-										echo $value2 . " Is in the database and the Images directory <br />";
+										// echo $value2 . " Is in the database and the Images directory <br />";
 									} else {
 										if (!in_array($value2, $ignore)) {
 											echo $value2 . " Is not in the database... removing from directory <br />";
@@ -72,6 +75,32 @@
 								} else {
 									echo 0;
 								}
+							// Check for Database entries with no full images pictures
+							if ( $dbase !== false ) {
+								foreach ($dbase as $k => $value3) {
+									if (in_array($value3, $files2)) {
+										// echo $value3 . " Is in Database and Images <br />";
+									} else {
+										echo "Removing " . $value3 . " from database <br />";
+										$sqlRemove = "DELETE from images where img_name = '$value3'";
+										$result = mysqli_query($db, $sqlRemove);
+									}
+								}
+							}
+							
+							// Check for Database entries with no thumbnails
+							if ( $dbase !== false ) {
+								foreach ($dbase as $k => $value3) {
+									if (in_array($value3, $files1)) {
+										// echo $value3 . " Is in Database and Thumbnails <br />";
+									} else {
+										echo "Removing " . $value3 . " from database <br />";
+										$sqlRemove = "DELETE from images where img_name = '$value3'";
+										$result = mysqli_query($db, $sqlRemove);
+									}
+								}
+							}
+
 												
 					?>
 					

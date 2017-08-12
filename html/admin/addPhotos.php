@@ -69,12 +69,12 @@
 									
 								if(!in_array($curimg, $ignore)) {
 											
-									if($photocount%3 == 0) {
+									if($photocount%4 == 0) {
 										echo '<div class="w3-row-padding w3-margin-top">';
 									}
 											
-									echo '<div class="w3-third">';
-									echo '<div class="w3-card-2">';
+									echo '<div class="w3-quarter">';
+									echo '<div class="w3-card-4">';
 											
 									echo "<img src='".$path_to_thumbs.$curimg."' style='width:100%' alt='' onclick='photomodal(".$photocount.")' class='w3-hover-opacity' />";
 									echo '<div id="'.$photocount.'" class="w3-modal w3-animate-zoom" onclick="closePhotoModal('.$photocount.')" align="center">';
@@ -86,7 +86,7 @@
 									echo '</div>';
 									echo '</div>';
 											
-									if($photocount%3 == 2) {
+									if($photocount%4 == 3) {
 										echo "</div>";
 									}
 											

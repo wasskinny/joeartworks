@@ -32,8 +32,7 @@ class Upload {
 								} else {
 									$sql = "INSERT INTO images (img_name, original) VALUES ('$filename', '1') ";
 									$result = $db->query($sql);
-									echo '<script>console.log('.$result.')</script>';
-									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>" . $result ;
+									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>" ;
 
 									$magicianObj = new imageLib($filepath);
 									$magicianObj->resizeImage(100, 100);
