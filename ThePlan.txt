@@ -6,3 +6,4 @@ Admin Section
 	Add User
 	Edit User
 		Not sure about this yet.
+	Admin Authentication and Admin user management
