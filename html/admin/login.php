@@ -1,3 +1,5 @@
+<html>
+
 <?php 
 
     // First we execute our common code to connection to the database and start the session 
@@ -127,34 +129,45 @@
 	include("styleSet.php")
 
 ?>
-<div class="w3-container">
-	<h1>Login</h1> 
-		<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
-		
-		<div id="id01" class="w3-modal">
-			<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width: 600px">
-				<div class="w3-center">
-					<br>
-					<span onclick="document.getElementById('id01').style.display='none'" class="w3-botton w3-xlarge w3-hover-red w3-display-topright" title="Close Login">&times;</span>
-					<img src="" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"
-				</div>
-				<form action="login.php" method="post" class"w3-container"> 
-					<div class="w3-section">
-						<label>Username</label> 
-						<input class="w3-input w3-border w3-magin-bottom" type="text" name="username" value="<?php echo $submitted_username; ?>" required /> 
-						<label>Password</label> 
-						<input class="w3-input w3-border" type="password" name="password" value="" required/> 
-						<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-						<input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
-						<!-- <input type="submit" value="Login" /> -->
-					</div>
-				</form> 
-				<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-					<button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-					<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
-      			</div>
-			</div>
-		</div>		
-<!-- <a href="register.php">Register</a>   -->
 
-</div>
+<body>
+	<div class="w3-main" >
+			<div class="<?php echo $adminHeaderClass ?>">
+				
+				<div class="w3-container">
+					<h1>Joe's ArtWorks Administration</h1>
+				</div>
+				
+			</div>
+			<div class="w3-container">
+				<h1>Login</h1> 
+					<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
+		
+					<div id="id01" class="w3-modal">
+						<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width: 600px">
+							<div class="w3-center">
+							<br>
+							<span onclick="document.getElementById('id01').style.display='none'" class="w3-botton w3-xlarge w3-hover-red w3-display-topright" title="Close Login">&times;</span>
+							<!-- <img src="" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
+							</div>
+							<form action="login.php" method="post" class"w3-container"> 
+								<div class="w3-section w3-center">
+									<label>Username</label> 
+									<input class="w3-input w3-border w3-magin-bottom" type="text" name="username" value="<?php echo $submitted_username; ?>" required /> 
+									<label>Password</label> 
+									<input class="w3-input w3-border" type="password" name="password" value="" required/> 
+									<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
+									<input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+						<!-- <input type="submit" value="Login" /> -->
+								</div>
+							</form> 
+							<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+								<button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+								<!-- <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span> -->
+      						</div>
+						</div>
+					</div>		
+			</div>
+	</div>
+</body>
+</html>

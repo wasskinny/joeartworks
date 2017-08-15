@@ -1,18 +1,9 @@
+<html>
+
 <?php 
 
-    // First we execute our common code to connection to the database and start the session 
-    require("common.php"); 
-    
-    if(empty($_SESSION['user'])) 
-    { 
-        // If they are not, we redirect them to the login page. 
-        header("Location: login.php"); 
+    include("head.php");
          
-        // Remember that this die statement is absolutely critical.  Without it, 
-        // people can view your members-only content without logging in. 
-        die("Redirecting to login.php"); 
-    }
-     
     // This if statement checks to determine whether the registration form has been submitted 
     // If it has, then the registration code is run, otherwise the form is displayed 
     if(!empty($_POST)) 
@@ -200,16 +191,55 @@
     
     
 ?>
-<h1>Register</h1> 
-<form action="register.php" method="post"> 
-    Username:<br /> 
-    <input type="text" name="username" value="" /> 
-    <br /><br /> 
-    E-Mail:<br /> 
-    <input type="text" name="email" value="" /> 
-    <br /><br /> 
-    Password:<br /> 
-    <input type="password" name="password" value="" /> 
-    <br /><br /> 
-    <input type="submit" value="Register" /> 
-</form>
+
+<body>
+	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2" sytle="width:200px;" id="adminSidebar">
+		<button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close &times;</button>
+		<a href="home.php" class="w3-bar-item w3-button">Return to Admin</a>
+		<a href="addPhotos.php" class="w3-bar-item w3-button">Add Photos</a>
+		<a href="editPhotos.php" class="w3-bar-item w3-button">Edit Gallery</a>
+		<a href="addClient.php" class="w3-bar-item w3-button">Add Client</a>
+		<a href="editClient.php" class="w3-bar-item w3-button">Edit Client</a>
+		<a href="logout.php" class="w3-bar-item w3-button">Log Out</a>
+		
+		<!-- <a href="register.php" class="w3-bar-item w3-button">Register Admins</a> -->
+	</div>
+		
+	<div class="w3-main" style="margin-left:200px">
+		<div class="<?php echo $adminHeaderClass ?>">
+			<button class="<?php echo $adminHeaderButtonClass ?>" onclick="w3_open()">&#9776;</button>
+			<div class="w3-container">
+				<h1>Joe's ArtWorks</h1>
+			</div>
+			
+		</div>
+		<div class="w3-container">
+			<div class="w3-center">
+				<h1>Register</h1>
+				<br>
+				<!-- <img src="" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top" /> -->
+			</div>
+				<form action="register.php" method="post" class"w3-container"> 
+					<div class="w3-section">
+						<label>Username:</label> 
+						<input class="w3-input w3-border w3-magin-bottom" type="text" name="username" value="" /> 
+						<label>Email:</label>
+						<input class="w3-input w3-border" type="text" name="email" value="" /> 
+						<label>Password:</label> 
+						<input class="w3-input w3-border" type="password" name="password" value="" /> 
+						<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Register</button>
+						
+						<!-- <input type="submit" value="Login" /> -->
+					</div>
+				</form> 
+			</div>
+		</div>
+
+		
+		<?php
+			include 'functions.php';	
+		?>
+
+
+</body>
+</html>

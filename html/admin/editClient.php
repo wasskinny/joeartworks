@@ -14,6 +14,7 @@
 			<a href="addClient.php" class="w3-bar-item w3-button">Add Client</a>
 		<!--	<a href="editClient.php" class="w3-bar-item w3-button">Edit Client</a> -->
 			<a href="register.php" class="w3-bar-item w3-button">Register Admins</a>
+			<a href="logout.php" class="w3-bar-item w3-button">Log Out</a>
 		</div>
 		
 		<div class="w3-main" style="margin-left:200px">
