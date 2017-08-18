@@ -66,6 +66,7 @@ $images = scandir($path_to_thumbs);
 			<a href="addClient.php" class="w3-bar-item w3-button">Add Client</a>
 			<a href="editClient.php" class="w3-bar-item w3-button">Edit Client</a>
 			<a href="register.php" class="w3-bar-item w3-button">Register Admins</a>
+			<br />
 			<a href="logout.php" class="w3-bar-item w3-button">Log Out</a>
 		</div>
 		

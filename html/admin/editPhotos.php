@@ -5,6 +5,19 @@
 		include 'head.php';
 		include '../configs/dbConfig.php';
 		include '../configs/siteSet.php';
+		
+		if (isset($_POST["newID"])) {
+		
+			$newID = $_POST["newID"];
+			$newDescription = $_POST["newDescription"];
+			
+			$newSQL =  "UPDATE images SET ";
+			$newSQL .= "Description = '" . $newDescription . "' ";
+			$newSQL .= "WHERE Id = '" . $newID . "'";
+			
+			$updateResult = mysqli_query($db, $newSQL);
+		
+		}
 	?>
 	
 	<body>
@@ -135,13 +148,30 @@
 									echo '<div class="w3-quarter">';
 									echo '<div class="w3-card-4 w3-center">';										
 									echo "<img src='".$path_to_thumbs.$imgName."' class='middle' alt='" . $imgDescription . "' onclick='photomodal(".$imgID.")' class='w3-hover-opacity' /><br />";
-									echo "<span class='w3-small'>$imgDescription</span>";
+									echo "<span class='w3-small'>" . $imgDescription . "</span>";
 									echo "</div>";
-									echo '<div id="'.$imgID.'" class="w3-modal w3-animate-zoom" onclick="closePhotoModal('.$imgID.')" align="center">';
-									echo "<img class='w3-modal-content' src='" . $path_to_images.$imgName."' />";
-									echo '</div>';
-									echo '</div>';
+									echo '<div id="'.$imgID.'" class="w3-modal w3-animate-zoom"  align="center">';
+									echo "<div class='w3-modal-content' >";
+										// echo "<div class='w3-card'>";
+											echo "<header class='w3-container" . $adminHeaderClass . "'>";
+												echo '<span onclick="closePhotoModal('.$imgID.')" class="w3-button w3-display-topright">&times;</span>';
+												echo "<p>" . $imgDescription . "</p>";
+											echo "</header>";
+											echo "<div class='w3-container'>";
+											echo "<img src='" . $path_to_images.$imgName . "' style='width:80%'/>";
+											echo "</div>";
+											echo "<form class='w3-container w3-light-grey' name='updatePhotos' action='editphotos.php' method='post'>";
+											echo "<input type='hidden' name='newID' value='" . $imgID . "'>";
+											echo "<label>Description</label>";
+											echo "<input class='w3-input w3-round-1' type='text' name='newDescription' value='" . $imgDescription . "' />";
+											echo "<button class='w3-submit w3-btn w3-green'>Submit</button>";
 											
+											echo "</form>";
+									echo "</div>";
+									echo '</div>';
+									echo '</div>';
+									
+																			
 								if($imageCount%4 == 3) {
 										echo "</div>";
 									}
@@ -160,6 +190,7 @@
 		</div>
 		
 		<?php
+			include 'foot.php';
 			include 'functions.php';	
 		?>
 	</body>

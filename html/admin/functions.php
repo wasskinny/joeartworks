@@ -21,8 +21,8 @@
 		document.getElementById($modalID).style.display = "block";
 	}
 	
-	function closePhotoModal($photocount) {
-		$modalID = $photocount;
+	function closePhotoModal($imgID) {
+		$modalID = $imgID;
 		document.getElementById($modalID).style.display = "none";
 	}
 	

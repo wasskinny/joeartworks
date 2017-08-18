@@ -237,6 +237,7 @@
 
 		
 		<?php
+			include 'foot.php';
 			include 'functions.php';	
 		?>
 
