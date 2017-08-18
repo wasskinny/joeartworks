@@ -160,7 +160,7 @@
 											echo "<div class='w3-container'>";
 											echo "<img src='" . $path_to_images.$imgName . "' style='width:80%'/>";
 											echo "</div>";
-											echo "<form class='w3-container w3-light-grey' name='updatePhotos' action='editphotos.php' method='post'>";
+											echo "<form class='w3-container w3-light-grey' name='updatePhotos' action='editPhotos.php' method='post'>";
 											echo "<input type='hidden' name='newID' value='" . $imgID . "'>";
 											echo "<label>Description</label>";
 											echo "<input class='w3-input w3-round-1' type='text' name='newDescription' value='" . $imgDescription . "' />";
