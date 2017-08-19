@@ -1,3 +1,7 @@
+<script>
+	w3.includeHTML();
+</script>
+
 <footer>
 	<div class="w3-container <?php echo $adminHeaderClass ?>">
 		
