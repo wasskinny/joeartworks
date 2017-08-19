@@ -16,6 +16,18 @@
 			$newSQL .= "WHERE Id = '" . $newID . "'";
 			
 			$updateResult = mysqli_query($db, $newSQL);
+			
+			if (!isset($_POST["imgOriginal"])) {
+				
+				$imgOriginal = 0;
+				
+				$imgOriginalSQL = "UPDATE images SET ";
+				$imgOriginalSQL .= "original = '" . $imgOriginal . "' ";
+				$imgOriginalSQL .= "Where Id = '" . $newID . "' ";
+				
+				$originalResult = mysqli_query($db, $imgOriginalSQL);
+				
+			}
 					
 		}
 		
@@ -28,6 +40,20 @@
 			$newCatSQL .= "WHERE Id = '" . $newID . "'";
 			
 			$categoryResult = mysqli_query($db, $newCatSQL);
+		}
+		
+		if (isset($_POST["imgOriginal"])) {
+			
+			$imgOriginal = $_POST["imgOriginal"];
+			
+			echo "This is the imgOriginal " . $imgOriginal ;
+			
+			$imgOriginalSQL = "UPDATE images SET ";
+			$imgOriginalSQL .= "original = '" . $imgOriginal . "' ";
+			$imgOriginalSQL .= "WHERE Id= '" . $newID . "' ";
+			
+			$originalResult = mysqli_query($db, $imgOriginalSQL);
+			
 		}
 		
 		if (isset($_POST["delPhoto"])) {
@@ -191,11 +217,11 @@
 											echo "<div class='w3-row-padding w3-border'>";
 												echo "<div class='w3-third'>";
 													echo "<label class='w3-red'>Delete Photo</label><br />";
-													echo "<input class='w3-radio' type='radio' name='delPhoto' value='delPhoto' >";
+													echo "<input class='w3-check' type='checkbox' name='delPhoto' value='delPhoto' >";
 												echo "</div>";	
 												echo "<div class='w3-third '>";
 													echo "<label>Original</label><br />";
-													echo "<input class='w3-radio' type='radio' name='imgOriginal' value='imgOriginal' " . $imgOriginal . ">";
+													echo "<input class='w3-check' type='checkbox' name='imgOriginal' value='1' " . $imgOriginal . ">";
 												echo "</div>";
 												echo "<div class='w3-third'>";
 													echo "<label>Category</label>";
