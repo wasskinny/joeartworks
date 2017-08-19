@@ -46,7 +46,7 @@
             try 
             { 
                 // Execute the query 
-                $stmt = $db->prepare($query); 
+                $stmt = $db1->prepare($query); 
                 $result = $stmt->execute($query_params); 
             } 
             catch(PDOException $ex) 
@@ -125,7 +125,7 @@
         try 
         { 
             // Execute the query 
-            $stmt = $db->prepare($query); 
+            $stmt = $db1->prepare($query); 
             $result = $stmt->execute($query_params); 
         } 
         catch(PDOException $ex) 
@@ -140,26 +140,79 @@
         $_SESSION['user']['email'] = $_POST['email']; 
          
         // This redirects the user back to the members-only page after they register 
-        header("Location: private.php"); 
+        // header("Location: home.php"); 
          
         // Calling die or exit after performing a redirect using the header function 
         // is critical.  The rest of your PHP script will continue to execute and 
         // will be sent to the user if you do not die or exit. 
-        die("Redirecting to private.php"); 
+        die("Redirecting to home.php"); 
     } 
      
 ?> 
-<h1>Edit Account</h1> 
-<form action="edit_account.php" method="post"> 
-    Username:<br /> 
-    <b><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></b> 
-    <br /><br /> 
-    E-Mail Address:<br /> 
-    <input type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" /> 
-    <br /><br /> 
-    Password:<br /> 
-    <input type="password" name="password" value="" /><br /> 
-    <i>(leave blank if you do not want to change your password)</i> 
-    <br /><br /> 
-    <input type="submit" value="Update Account" /> 
-</form>
+<html>
+	
+	<head>
+	
+	<?php
+		include_once ('head.php');
+		include_once ('../configs/dbConfig.php');
+		
+		require '../configs/siteSet.php';
+		require 'functions.php';
+ 		
+		
+		
+	?>
+	
+	</head>
+	
+	<body>
+		
+		<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2" sytle="width:200px;" id="adminSidebar">
+			<button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close &times;</button>
+			<a href="home.php" class="w3-bar-item w3-button">Return to Admin &times;</a>
+			<a href="addPhotos.php" class="w3-bar-item w3-button">Add Photos</a>
+			<a href="editPhotos.php" class="w3-bar-item w3-button">Edit Gallery</a>
+			<a href="addClient.php" class="w3-bar-item w3-button">Add Client</a>
+			<a href="editClient.php" class="w3-bar-item w3-button">Edit Client</a>
+			<a href="register.php" class="w3-bar-item w3-button">Register Admins</a>
+			<a href="editAdmin.php" class="w3-bar-item w3-button">Edit Admins</a>
+			<br />
+			<a href="logout.php" class="w3-bar-item w3-button">Log Out</a>
+		</div>
+		
+		<div class="w3-main" style="margin-left:200px">
+		<!-- Header Div -->
+			<div class="<?php echo $adminHeaderClass ?>">
+				<button class="<?php echo $adminHeaderButtonClass ?>" onclick="w3_open()">&#9776;</button>
+				<div class="w3-container">
+					<!-- Header -->
+				</div>
+			</div> <!-- End of Head Div -->
+		<!-- Body Div -->
+			<div class="w3-container">
+				<h1>Edit Account</h1> 
+					<form action="editAdmin.php" method="post"> 
+						<label>Username:</label> 
+						<b><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></b> 
+						<br /><br /> 
+						<label>E-Mail Address:</label> 
+						<input type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" /> 
+						<br /><br /> 
+						<label>Password:</label> 
+						<input type="password" name="password" value="" /><br /> 
+						<i>(leave blank if you do not want to change your password)</i> 
+						<br /><br /> 
+						<input type="submit" value="Update Account" /> 
+					</form>
+
+			</div>   <!-- End of Body Div -->
+		</div>
+		
+		<?php
+			// include_once 'functions.php';
+			include_once 'foot.php';
+		?>
+	</body>
+</html>
+

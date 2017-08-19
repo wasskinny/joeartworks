@@ -31,8 +31,8 @@
 					
 				if($query->num_rows > 0){
 					while($row = $query->fetch_assoc()){
-						$imageThumbURL = 'images/thumb/'.$row["file_name"];
-						$imageURL = 'images/'.$row["file_name"];
+						$imageThumbURL = 'images/thumbs/'.$row["img_name"];
+						$imageURL = 'images/fullsized/'.$row["img_name"];
 						
 			?>
 				
