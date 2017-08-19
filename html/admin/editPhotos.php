@@ -16,8 +16,28 @@
 			$newSQL .= "WHERE Id = '" . $newID . "'";
 			
 			$updateResult = mysqli_query($db, $newSQL);
-		
+					
 		}
+		
+		if (isset($_POST["newCategory"])) {
+			
+			$newCategory = $_POST["newCategory"];
+			
+			$newCatSQL = "UPDATE images SET ";
+			$newCatSQL .= "category_id = '" . $newCategory . "' ";
+			$newCatSQL .= "WHERE Id = '" . $newID . "'";
+			
+			$categoryResult = mysqli_query($db, $newCatSQL);
+		}
+		
+		if (isset($_POST["delPhoto"])) {
+			
+			$delSQL = "DELETE from images Where id='" . $newID . "'";
+			
+			$deleteResult = mysqli_query($db, $delSQL);
+			
+		}
+		
 	?>
 	
 	<body>
@@ -66,7 +86,7 @@
         						
         							} else {
 										if (!in_array($value, $ignore)) {
-										echo $value . " Is not in the database <br/>";
+										echo $value . " Is not in the database... Removing Thumbnail <br/>";
 										unlink ($path_to_thumbs.$value);
 										}
         						    }
@@ -82,7 +102,7 @@
 										// echo $value2 . " Is in the database and the Images directory <br />";
 									} else {
 										if (!in_array($value2, $ignore)) {
-											echo $value2 . " Is not in the database... removing from directory <br />";
+											echo $value2 . " Is not in the database... Removing Image from directory <br />";
 											unlink ($path_to_images.$value2);
 										}
 									} 
@@ -134,12 +154,23 @@
 						$sqlLoadImages = mysqli_query($db, $sqlImages);
 						$imageCount = 0;
 						
+						$sqlCategories = "SELECT * FROM categories";
+						$sqlLoadCategories = mysqli_query($db, $sqlCategories);
+						
+						
 						while ($row = mysqli_fetch_array($sqlLoadImages,MYSQLI_ASSOC)) {
 							
 								$imgID = $row["id"];
 								$imgName = $row["img_name"];
 								$imgDescription = $row["description"];
+								$imgOriginal = $row["original"];
 								$imgCategory = $row["category"];
+								
+								if ($imgOriginal == "1") {
+									$imgOriginal = "checked";
+								} else {
+									$imgOriginal = "";
+								}
 											
 								if($imageCount%4 == 0) {
 										echo '<div class="w3-row-padding w3-margin-top">';
@@ -161,6 +192,35 @@
 											echo "<img src='" . $path_to_images.$imgName . "' style='width:80%'/>";
 											echo "</div>";
 											echo "<form class='w3-container w3-light-grey' name='updatePhotos' action='editPhotos.php' method='post'>";
+											echo "<div class='w3-row-padding w3-border'>";
+												echo "<div class='w3-third'>";
+													echo "<label class='w3-red'>Delete Photo</label><br />";
+													echo "<input class='w3-radio' type='radio' name='delPhoto' value='delPhoto' >";
+												echo "</div>";	
+												echo "<div class='w3-third '>";
+													echo "<label>Original</label><br />";
+													echo "<input class='w3-radio' type='radio' name='imgOriginal' value='imgOriginal' " . $imgOriginal . ">";
+												echo "</div>";
+												echo "<div class='w3-third'>";
+													echo "<label>Category</label>";
+													echo "<select class='w3-select' name='newCategory'>";
+													echo "<option value='' disabled selected>" . $imgCategory . "</option>";
+														
+														$sqlCategories = "SELECT * FROM categories";
+														$sqlLoadCategories = mysqli_query($db, $sqlCategories);
+														
+														while ($catRow = mysqli_fetch_array($sqlLoadCategories,MYSQLI_ASSOC)) {
+															
+															$categoryID = $catRow["ID"];
+															$categoryName = $catRow["category"];
+															
+															echo "<option value='" . $categoryID . "'>" . $categoryName . "</option>";
+															
+														}
+														
+													echo "</select>";
+												echo "</div>";
+											echo "</div>";
 											echo "<input type='hidden' name='newID' value='" . $imgID . "'>";
 											echo "<label>Description</label>";
 											echo "<input class='w3-input w3-round-1' type='text' name='newDescription' value='" . $imgDescription . "' />";
