@@ -18,6 +18,8 @@
 	<body>
 	
 	<div class="container">
+		<div>
+			<a href="admin/index.php">Go to Admin Page</a>
 		<div class="gallery">
 			<?php
 				
