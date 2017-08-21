@@ -31,6 +31,29 @@
 					
 		}
 		
+		if (isset($_POST["newCatName"])) {
+			
+			$newCatName = $_POST["newCatName"];
+			
+			$newCatNameSQL = "INSERT into categories ";
+			$newCatNameSQL .= "(`category`) VALUES ('" . $newCatName . "') ";
+			$newCatNameSQL .= "ON DUPLICATE KEY UPDATE category = category";
+			
+			$newCategoryResult = mysqli_query($db, $newCatNameSQL);
+			
+			$newCatSQL = "SELECT ID FROM categories ";
+			$newCatSQL .= "WHERE Category = '" . $newCatName . "' ";
+			
+			$updateCatID = mysqli_fetch_array(mysqli_query($db, $newCatSQL));
+			$newCategory = $updateCatID['ID'];
+			
+			$newCatSQL = "UPDATE images SET ";
+			$newCatSQL .= "category_id = '" . $newCategory . "' ";
+			$newCatSQL .= "WHERE Id = '" . $newID . "'";
+			
+			$categoryResult = mysqli_query($db, $newCatSQL);
+		}
+		
 		if (isset($_POST["newCategory"])) {
 			
 			$newCategory = $_POST["newCategory"];
@@ -41,12 +64,12 @@
 			
 			$categoryResult = mysqli_query($db, $newCatSQL);
 		}
-		
+				
 		if (isset($_POST["imgOriginal"])) {
 			
 			$imgOriginal = $_POST["imgOriginal"];
 			
-			echo "This is the imgOriginal " . $imgOriginal ;
+			// echo "This is the imgOriginal " . $imgOriginal ;
 			
 			$imgOriginalSQL = "UPDATE images SET ";
 			$imgOriginalSQL .= "original = '" . $imgOriginal . "' ";
@@ -241,6 +264,9 @@
 														}
 														
 													echo "</select>";
+													echo "<label>Add Category</label>";
+													echo "<input type='text' name='newCatName' value='' />";
+													
 												echo "</div>";
 											echo "</div>";
 											echo "<input type='hidden' name='newID' value='" . $imgID . "'>";

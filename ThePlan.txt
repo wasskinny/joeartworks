@@ -1,9 +1,54 @@
 Admin Section
+
+fix footer so menu doesn't tromp on it
+
 X	Add Photos (I want to add photos first so we can add multiple photos)
 	Edit Photos 
 	X	Edit the quantity of photos, descriptions, Titles and Dates
 	X	Separate database in table linked to the images table
-	Add User
-	Edit User
+	Add and Edit Categories
+		Add Category by typing it into Edit Photo form?
+		More than one category?
+	
+	The folks who buy photos.
+		There will need to be a captcha form in public for buyers to register.
+		That data will be edited in the Admin section.
+		The admin section will also be able to add users.
+			Add User
+			Edit User
+				Database - Clients
+				Fields
+					ID
+					Salutation
+					First Name
+					Middle
+					Last Name
+					Suffix
+					Billing Address
+					Billing Address 2
+					Billing City
+					Billing State
+					Billing Postal Code
+					Billing Country
+					Shipping Address
+					Shipping Address 2
+					Shipping City
+					Shipping State
+					Shipping Postal Code
+					Shipping Country
+					Orders (linked to order database)
+				
+				Database - Orders
+				Fields
+					Order Number
+					Client ID
+					Image Name
+					Prints
+					Originals
+					Status
+					
+
+
 		Not sure about this yet.
 	Admin Authentication and Admin user management
+		Still need to edit and delete Admins
