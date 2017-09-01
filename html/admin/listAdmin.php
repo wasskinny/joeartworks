@@ -13,6 +13,22 @@
         // people can view your members-only content without logging in. 
         die("Redirecting to login.php"); 
     } 
+    
+    include_once ('../configs/dbConfig.php');
+    
+    if(isset($_POST['newID'])) {
+	    
+	    $newID = $_POST['newID'];
+	    
+	    if(isset($_POST['deleteAdmin'])) {
+		    
+		    $delAdminSQL = "DELETE from `users` ";
+		    $delAdminSQL .= "WHERE id = " . $newID ." ";
+		    
+		    $delAdminResult = mysqli_query($db, $delAdminSQL);
+	    }
+	    
+    }
      
     // Everything below this point in the file is secured by the login system 
      
@@ -88,20 +104,30 @@
 			</div> <!-- End of Head Div -->
 		<!-- Body Div -->
 			<div class="w3-container">
-				<h1>Memberlist</h1> 
+				<h1>List of Admins</h1> 
+					<form name="editAdmin" method="post" action="listAdmin.php">
 					<table> 
 						<tr> 
-							<th>ID</th> 
+							<th></th> 
 							<th>Username</th> 
-							<th>E-Mail Address</th> 
+							<th>E-Mail Address</th>
+							<th>Delete Admin</th>
     					</tr> 
 						<?php foreach($rows as $row): ?> 
 						<tr> 
-							<td><?php echo $row['id']; ?></td> <!-- htmlentities is not needed here because $row['id'] is always an integer --> 
+							<td><input type="hidden" name="newID" value="<?php echo $row['id']; ?>"</td> 
 							<td><?php echo htmlentities($row['username'], ENT_QUOTES, 'UTF-8'); ?></td> 
-							<td><?php echo htmlentities($row['email'], ENT_QUOTES, 'UTF-8'); ?></td> 
-        				</tr> 
-						<?php endforeach; ?> 
+							<td><?php echo htmlentities($row['email'], ENT_QUOTES, 'UTF-8'); ?></td>
+							<td align="center"><input type="checkbox" name="deleteAdmin">
+        				</tr>
+        				<?php endforeach; ?> 
+        				<tr>
+	        				<td>
+	        				</td>
+	        				<td>
+		        				<input type="submit" value="Submit">
+	        				</td>
+        				</tr>
 					</table> 
 			</div>   <!-- End of Body Div -->
 		</div>

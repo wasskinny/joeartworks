@@ -36,6 +36,47 @@ $images = scandir($path_to_thumbs);
 							}
 ?>
 
+				<div class="content">
+					<form class="" action="addClient.php" method="post">
+					<div class="w3-row-padding">
+						<div class="w3-third">
+							<label>Prefix</label>
+							<select class="w3-select <?php echo $adminSelectClass ?>" name="salutation">
+									<option value="0" disabled selected>Please Select</option>
+									<option value="1">Mr.</option>
+									<option value="2">Mrs.</option>
+									<option value="3">Miss</option>
+									<option value="4">Ms.</option>
+									<option value="5">Dr.</option>
+									<option value="6">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="w3-row-padding">
+						<div class="w3-third">
+							<label>First Name</label>
+							<input class="w3-input w3-border w3-round" value="" name="fname" />
+						</div>
+						<div class="w3-third">
+							<label>Middle</label>
+							<input class="w3-input w3-border w3-round" value="" name="fname" />
+						</div>
+						<div class="w3-third">
+							<label>Last Name</label>
+							<input class="w3-input w3-border w3-round" value="" name="fname" />
+						</div>
+					</div>
+					<div class="w3-row-padding">
+						<div class="w3-third">
+							<label>First Name</label>
+							<input class="w3-input w3-border w3-round" value="" name="fname" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+<input type='text' name='newCatName' value='Add Category'>
 
 <!-- Admin Page Template -->
 <!DOCTYPE html>

@@ -11,6 +11,7 @@
 			<div w3-include-html="menu.html">
 			</div>
 		</div>
+
 		
 		<div class="w3-main" style="margin-left:200px">
 			<div class="<?php echo $adminHeaderClass ?>">

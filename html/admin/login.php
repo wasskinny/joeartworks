@@ -153,7 +153,7 @@
 							<form action="login.php" method="post" class"w3-container"> 
 								<div class="w3-section w3-center">
 									<label>Username</label> 
-									<input class="w3-input w3-border w3-magin-bottom" type="text" name="username" value="<?php echo $submitted_username; ?>" required /> 
+									<input class="w3-input w3-border w3-magin-bottom" type="text" name="username" value="<?php echo $submitted_username; ?>" required autofocus /> 
 									<label>Password</label> 
 									<input class="w3-input w3-border" type="password" name="password" value="" required/> 
 									<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
@@ -169,7 +169,14 @@
 					</div>		
 			</div>
 	</div>
-<?php include 'foot.php'; ?>
-
 </body>
+<footer>
+		<div class="w3-container <?php echo $adminHeaderClass ?>">
+		
+		<p>&copy; 2017 Joe's Artworks, LLC  All Rights Reserved </p>
+	
+	</div>
+	</div>
+</footer>
+
 </html>

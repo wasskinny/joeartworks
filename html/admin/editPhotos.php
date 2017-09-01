@@ -110,7 +110,7 @@
 
 						// Query database
 						$sqlFind = 'SELECT `img_name` FROM `images`';
-						$result = mysqli_query($db, $sqlFind);
+						$result = mysqli_query($db, $sqlFind) or die (mysqli_error($db));
 						$dbase = []; // create empty array
 		
 						while ($row = mysqli_fetch_row($result))
