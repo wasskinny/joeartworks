@@ -14,7 +14,7 @@
 				$deleteClientSQL = "DELETE from Clients ";
 				$deleteClientSQL .= "WHERE ID = '" . $deleteClientID . "' ";
 				
-				// echo $deleteClientSQL . "<br />";
+				echo $deleteClientSQL . "<br />";
 				
 				$deleteClientResult = mysqli_query($db, $deleteClientSQL) or die (mysqli_error($db));
 				
@@ -69,7 +69,7 @@
 			$newRecordSQL .= "2Phone='" . $newClientAltPhone . "'";
 			
 			
-			// echo $newRecordSQL . "</br>";
+			echo $newRecordSQL . "</br>";
 			
 			$newRecordResult = mysqli_query($db, $newRecordSQL) or die (mysqli_error($db));
 			
