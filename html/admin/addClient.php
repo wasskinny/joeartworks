@@ -5,7 +5,77 @@
 		include_once 'head.php';
 		include_once ('../configs/dbConfig.php');
 		
-		
+		if(!empty($_POST)) {
+			
+			if(isset($_POST["isDeleted"])) {
+				
+				$deleteClientID = $_POST["newClientID"];
+				
+				$deleteClientSQL = "DELETE from Clients ";
+				$deleteClientSQL .= "WHERE ID = '" . $deleteClientID . "' ";
+				
+				// echo $deleteClientSQL . "<br />";
+				
+				$deleteClientResult = mysqli_query($db, $deleteClientSQL) or die (mysqli_error($db));
+				
+			} else {
+			
+			$isClicked = $_POST["isClicked"];
+			$newClientID = $_POST["newClientID"];
+			$newClientSal = $_POST["newClientSal"];
+			$newClientFName = $_POST["newClientFName"];
+			$newClientMiddle = $_POST["newClientMiddle"];
+			$newClientLName = $_POST["newClientLName"];
+			$newClientSuffix = $_POST["newClientSuffix"];
+			$newClientEmail = $_POST["newClientEmail"];
+			$newClientPhone = $_POST["newClientPhone"];
+			$newClientAltPhone = $_POST["newClientAltPhone"];
+			$newClientCreated = $_POST["newClientCreated"];
+			
+			// I need to check to see if this user information exists
+			
+			$newRecordSQL = "INSERT into clients ";
+			$newRecordSQL .= "(ID, ";
+			$newRecordSQL .= "Sal, ";
+			$newRecordSQL .= "FName, ";
+			$newRecordSQL .= "Middle, ";
+			$newRecordSQL .= "LName, ";
+			$newRecordSQL .= "Suffix, ";
+			$newRecordSQL .= "Email, ";
+			$newRecordSQL .= "Phone, ";
+			$newRecordSQL .= "2Phone, ";
+			$newRecordSQL .= "Created";
+			$newRecordSQL .= ") ";
+			$newRecordSQL .= "VALUES ";
+			$newRecordSQL .= "('" . $newClientID . "', ";
+			$newRecordSQL .= "'" . $newClientSal . "', ";
+			$newRecordSQL .= "'" . $newClientFName . "', ";
+			$newRecordSQL .= "'" . $newClientMiddle . "', ";
+			$newRecordSQL .= "'" . $newClientLName . "', ";
+			$newRecordSQL .= "'" . $newClientSuffix . "', ";
+			$newRecordSQL .= "'" . $newClientEmail . "', ";
+			$newRecordSQL .= "'" . $newClientPhone . "', ";
+			$newRecordSQL .= "'" . $newClientAltPhone . "', ";
+			$newRecordSQL .= "'" . $newClientCreated . "' ";
+			$newRecordSQL .= ") ";
+			$newRecordSQL .= "ON DUPLICATE KEY UPDATE ";
+			$newRecordSQL .= "Sal='" . $newClientSal . "', ";
+			$newRecordSQL .= "FName='" . $newClientFName . "', ";
+			$newRecordSQL .= "Middle='" . $newClientMiddle . "', ";
+			$newRecordSQL .= "LName='" . $newClientLName . "', ";
+			$newRecordSQL .= "Suffix='" . $newClientSuffix . "', ";
+			$newRecordSQL .= "Email='" . $newClientEmail . "', ";
+			$newRecordSQL .= "Phone='" . $newClientPhone . "', ";
+			$newRecordSQL .= "2Phone='" . $newClientAltPhone . "'";
+			
+			
+			// echo $newRecordSQL . "</br>";
+			
+			$newRecordResult = mysqli_query($db, $newRecordSQL) or die (mysqli_error($db));
+			
+			}
+			
+		}
 		
 	?>
 	
@@ -59,6 +129,7 @@
 				<table class="w3-table-all">
 					<thead>
 					<tr class="w3-light-grey">
+						<th>ID</th>
 						<th>Salutation</th>
 						<th>First Name</th>
 						<th>Middle</th>
@@ -69,24 +140,27 @@
 						<th>Alt Phone</th>
 						<th>Date Created</th>
 						<th></th>
+						<th>Delete</th>
 					</tr>
 					</thead>
-
-					<form name="addClient" action="$myFileName">
 						<?php
+						echo "<form name='addClient' action='" . $myFileName . "' method='post'>";
 							echo '<tr>';
-								echo "<input type='hidden' name='newClientID' value=''/>";
+								echo "<input type='hidden' name='isClicked' value=1 />";
+								echo "<td><input type='hidden' name='newClientID' id='newClientID' value=''/></td>";
 								echo "<td><input type='text' name='newClientSal' value=''></input></td>";
-								echo "<td><input type='text' name='newClientFName' value=''></input></td>";
+								echo "<td><input type='text' name='newClientFName' value='' required></input></td>";
 								echo "<td><input type='text' name='newClientMiddle' value=''></input></td>";
 								echo "<td><input type='text' name='newClientLName' value=''></input></td>";
 								echo "<td><input type='text' name='newClientSuffix' value=''></input></td>";
 								echo "<td><input type='email' name='newClientEmail' value=''></input></td>";
 								echo "<td><input type='text' name='newClientPhone' value=''></input></td>";
 								echo "<td><input type='text' name='newClientAltPhone' value=''></input></td>";
-								echo "<td><input type='date' name='newClientCreated' value='" . date('Y-m-d H:i:s') . "'></input></td>";
-								echo "<td><button class='w3-button' type='submit'>Submit</button>";
+								echo "<td><input type='date' name='newClientCreated' value='" . date('Y-m-d') . "'></input></td>";
+								echo "<td><button type='submit' class='w3-button'>Submit</button></td>";
 							echo '</tr>';
+						echo "</form>";
+						
 					
 						while ($clientRow = mysqli_fetch_array($getClientResult)) {
 							
@@ -101,23 +175,34 @@
 							$clientSuffix = $clientRow['Suffix'];
 							$clientCreated = $clientRow['Created'];
 						
+							echo "<form name='editClient' action='" . $myFileName . "' method='post'>";
 							echo '<tr>';
-								echo "<td><input type='hidden' name='newClientID' value='" . $clientID . "'/></td>";
-								echo "<td><input type='text' name='newClientSal' value='" . $clientSal . "'></input></td>";
-								echo "<td><input type='text' name='newClientFName' value='" . $clientFName . "'></input></td>";
-								echo "<td><input type='text' name='newClientMiddle' value='" . $clientMiddle . "'></input></td>";
-								echo "<td><input type='text' name='newClientLName' value='" . $clientLName . "'></input></td>";
-								echo "<td><input type='text' name='newClientSuffix' value='" . $clientSuffix . "'></input></td>";
-								echo "<td><input type='email' name='newClientEmail' value='" . $clientEmail . "'></input></td>";
-								echo "<td><input type='text' name='newClientPhone' value='" . $clientPhone . "'></input></td>";
-								echo "<td><input type='text' name='newClientAltPhone' value='" . $clientAltPhone . "'></input></td>";
-								echo "<td><input type='now()' name='newClientCreated' value='" . $clientCreated . "'></input></td>";
-								echo "<td><button class='w3-button' type='submit'>Submit</button>";
+								echo "<input type='hidden' name='isClicked' value=1 />";
+								echo "<input type='hidden' name='newClientID' value='" . $clientID . "'/></td>";
+								echo "<td>" . $clientID . "</td>";
+								echo "<td><input type='text' name='newClientSal' value='" . $clientSal . "'></td>";
+								echo "<td><input type='text' name='newClientFName' value='" . $clientFName . "'></td>";
+								echo "<td><input type='text' name='newClientMiddle' value='" . $clientMiddle . "'></td>";
+								echo "<td><input type='text' name='newClientLName' value='" . $clientLName . "'></td>";
+								echo "<td><input type='text' name='newClientSuffix' value='" . $clientSuffix . "'></td>";
+								echo "<td><input type='email' name='newClientEmail' value='" . $clientEmail . "'></td>";
+								echo "<td><input type='text' name='newClientPhone' value='" . $clientPhone . "'></td>";
+								echo "<td><input type='text' name='newClientAltPhone' value='" . $clientAltPhone . "'></td>";
+								echo "<td><input type='now()' name='newClientCreated' value='" . $clientCreated . "'></td>";
+								echo "<td><button class='w3-button' type='submit'>Submit</button></td>";
+								echo "</form>";
+								echo "<td>";
+									echo "<form name='deleteClient' action='" . $myFileName . "' method='post'>";
+									echo "<input type='hidden' name='newClientID' value='" . $clientID . "'>";
+									echo "<input type='hidden' name='isDeleted' value=1>";
+									echo "<button class='w3-button w3-red' type='submit'>&times;</button>";
+									echo "</form>";
+								echo "</td>";
 							echo '</tr>';
 							
 						}
 					?>
-				</form>
+				
 				</table>
 				</div>
 			</div>	

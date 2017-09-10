@@ -49,13 +49,12 @@ CREATE TABLE `orders` (
 	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+ALTER TABLE `clients` ADD UNIQUE(`Email`);
 ALTER TABLE `client_addresses` ADD FOREIGN KEY (`client_id`) REFERENCES clients (`ID`) ON DELETE CASCADE;
 ALTER TABLE `client_addresses` ADD FOREIGN KEY (`address_id`) REFERENCES addresses (`ID`) ON DELETE CASCADE;
 ALTER TABLE `orders` ADD FOREIGN KEY (`client_id`) REFERENCES clients (`ID`) ON DELETE CASCADE;
 ALTER TABLE `orders` ADD FOREIGN KEY (`ship_address_id`) REFERENCES addresses (`ID`);
 ALTER TABLE `orders` ADD FOREIGN KEY (`bill_address_id`) REFERENCES addresses (`ID`);
-// ALTER TABLE `orders` ADD FOREIGN KEY (`product_id`) REFERENCES images (`ID`);
 
 
 
