@@ -35,8 +35,8 @@
 			// I need to check to see if this user information exists
 			
 			$newRecordSQL = "INSERT into clients ";
-			$newRecordSQL .= "(ID, ";
-			$newRecordSQL .= "Sal, ";
+			// $newRecordSQL .= "(ID, ";
+			$newRecordSQL .= "(Sal, ";
 			$newRecordSQL .= "FName, ";
 			$newRecordSQL .= "Middle, ";
 			$newRecordSQL .= "LName, ";
@@ -47,8 +47,8 @@
 			$newRecordSQL .= "Created";
 			$newRecordSQL .= ") ";
 			$newRecordSQL .= "VALUES ";
-			$newRecordSQL .= "('" . $newClientID . "', ";
-			$newRecordSQL .= "'" . $newClientSal . "', ";
+			// $newRecordSQL .= "('" . $newClientID . "', ";
+			$newRecordSQL .= "('" . $newClientSal . "', ";
 			$newRecordSQL .= "'" . $newClientFName . "', ";
 			$newRecordSQL .= "'" . $newClientMiddle . "', ";
 			$newRecordSQL .= "'" . $newClientLName . "', ";
