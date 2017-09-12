@@ -188,7 +188,7 @@
 								echo "<td><input type='email' name='newClientEmail' value='" . $clientEmail . "'></td>";
 								echo "<td><input type='text' name='newClientPhone' value='" . $clientPhone . "'></td>";
 								echo "<td><input type='text' name='newClientAltPhone' value='" . $clientAltPhone . "'></td>";
-								echo "<td><input type='now()' name='newClientCreated' value='" . $clientCreated . "'></td>";
+								echo "<td><input type='date' name='newClientCreated' value='" . $clientCreated . "'></td>";
 								echo "<td><button class='w3-button' type='submit'>Submit</button></td>";
 								echo "</form>";
 								echo "<td>";
