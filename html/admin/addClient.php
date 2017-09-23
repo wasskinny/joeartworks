@@ -11,7 +11,7 @@
 				
 				$deleteClientID = $_POST["newClientID"];
 				
-				$deleteClientSQL = "DELETE from Clients ";
+				$deleteClientSQL = "DELETE from clients ";
 				$deleteClientSQL .= "WHERE ID = '" . $deleteClientID . "' ";
 				
 				echo $deleteClientSQL . "<br />";
@@ -143,7 +143,7 @@
 						<th>Delete</th>
 					</tr>
 					</thead>
-						<?php
+						<?php  // Add Client information
 						echo "<form name='addClient' action='" . $myFileName . "' method='post'>";
 							echo '<tr>';
 								echo "<input type='hidden' name='isClicked' value=1 />";
@@ -161,7 +161,8 @@
 							echo '</tr>';
 						echo "</form>";
 						
-					
+						// Show existing Clients
+						
 						while ($clientRow = mysqli_fetch_array($getClientResult)) {
 							
 							$clientID = $clientRow['ID'];
@@ -175,11 +176,12 @@
 							$clientSuffix = $clientRow['Suffix'];
 							$clientCreated = $clientRow['Created'];
 						
-							echo "<form name='editClient' action='" . $myFileName . "' method='post'>";
+							
 							echo '<tr>';
+								echo "<td><button type='' onclick='openClientModal(" . $clientID . ")'>" . $clientID . "</button></td>";
+								echo "<form name='editClient' action='" . $myFileName . "' method='post'>";
 								echo "<input type='hidden' name='isClicked' value=1 />";
-								echo "<input type='hidden' name='newClientID' value='" . $clientID . "'/></td>";
-								echo "<td>" . $clientID . "</td>";
+								echo "<input type='hidden' name='newClientID' value='" . $clientID . "'/></td>";					
 								echo "<td><input type='text' name='newClientSal' value='" . $clientSal . "'></td>";
 								echo "<td><input type='text' name='newClientFName' value='" . $clientFName . "'></td>";
 								echo "<td><input type='text' name='newClientMiddle' value='" . $clientMiddle . "'></td>";
@@ -200,10 +202,126 @@
 								echo "</td>";
 							echo '</tr>';
 							
-						}
+							// Address Modal
+							
+																	
+										$clientAddressSQL = "SELECT `clients`.`ID` AS `clientsID`, ";
+										$clientAddressSQL .= "`addresses`.`ID` AS `addID`, `addresses`.*, ";
+										$clientAddressSQL .= "`client_addresses`.`ID` AS `clientAddId`, `client_addresses`.* ";
+										$clientAddressSQL .= "FROM `clients` ";
+										$clientAddressSQL .= "LEFT JOIN `client_addresses` ON `client_addresses`.`client_id` = `clients`.`ID` ";
+										$clientAddressSQL .= "LEFT JOIN `addresses` ON `client_addresses`.`address_id` = `addresses`.`ID` ";
+										$clientAddressSQL .= "WHERE `clients`.`ID` = " . $clientID;
+										
+										// echo $clientAddressSQL;
+										
+										$clientAddressResult = mysqli_query($db, $clientAddressSQL) or die (mysqli_error($db));
+										
+										while ($clientAddressRow = mysqli_fetch_array($clientAddressResult)) {
+											
+											$addID = $clientAddressRow["addID"];
+											$clientsID = $clientAddressRow["clientsID"];
+											$clientAddID = $clientAddressRow["clientAddId"];
+											$addStreet1 = $clientAddressRow["Street1"];
+											$addStreet2 = $clientAddressRow["Street2"];
+											$addCity = $clientAddressRow["City"];
+											$addState = $clientAddressRow["State"];
+											$addZip = $clientAddressRow["ZIP"];
+											$addCountry = $clientAddressRow["Country"];
+											
+											echo "<div id='" . $clientsID . "' class='w3-modal'>";
+												echo "<div class='w3-modal-content'>";
+													echo "<div class='w3-container'>";
+														echo "<span onclick='closeClientModal(" . $clientsID . ")' class='w3-button w3-display-topright'>&times;</span>";
+														echo "<p> Addresses for " . $clientsID ." " . $clientFName . " " . $clientLName . "</p>";
+															echo "<div class='w3-container'>";
+																		echo "<div class='w3-container w3-cell-row'>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo "Address ID";
+																			echo "</div>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo $addID;
+																			echo "</div>";
+																		echo "</div>";
+																		echo "<div class='w3-container w3-cell-row'>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo "Street 1";
+																			echo "</div>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo $addStreet1;
+																			echo "</div>";
+																		echo "</div>";
+																		echo "<div class='w3-container w3-cell-row'>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo "Street 2";
+																			echo "</div>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo $addStreet2;
+																			echo "</div>";
+																		echo "</div>";
+																		echo "<div class='w3-container w3-cell-row'>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo "City";
+																			echo "</div>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo $addCity;
+																			echo "</div>";
+																		echo "</div>";
+																		echo "<div class='w3-container w3-cell-row'>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo "State";
+																			echo "</div>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo $addState;
+																			echo "</div>";
+																		echo "</div>";
+																		echo "<div class='w3-container w3-cell-row'>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo "Zip Code";
+																			echo "</div>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo $addZip;
+																			echo "</div>";
+																		echo "</div>";
+																		echo "<div class='w3-container w3-cell-row'>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo "Country";
+																			echo "</div>";
+																			echo "<div class='w3-container w3-cell w3-border w3-round-small' style='width:50%'>";
+																				echo $addCountry;
+																			echo "</div>";
+																		echo "</div>";												
+																echo "</div>";
+													echo "<p></p>";			
+														echo "<div class='w3-container'>";
+															echo "<div class='w3-container w3-cell-row'>";
+																echo "<div class='w3-container w3-cell'>";
+																	echo "Add Address";
+																echo "</div>";
+																echo "<div class='w3-container w3-cell'>";
+																echo "</div>";
+																echo "<div class='w3-container w3-cell'>";
+																	echo "Delete Address";
+																echo "</div>";
+															echo "</div>";
+														echo "</div>";
+															
+													echo "</div>";
+												echo "</div>";
+											echo "</div>";
+
+											
+										}
+										
+															
+													
+						}	
+					echo "</table>";
+					echo "</div>";
+	
 					?>
-				
-				</table>
+				<!-- </table> -->
+				</div>
 				</div>
 			</div>	
 			<div class="w3-container">
@@ -212,9 +330,12 @@
 		</div>
 		
 	</body>
+	<footer>
 	<?php
+		
+
 		include_once 'functions.php';
 		include_once 'foot.php';
 	?>
-
+	</footer>
 </html>

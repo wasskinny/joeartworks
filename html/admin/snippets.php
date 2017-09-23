@@ -125,3 +125,99 @@ $images = scandir($path_to_thumbs);
 		?>
 	</body>
 </html>
+
+echo "<div id='" . $clientID . "' class='w3-modal'>";
+								echo "<div class='w3-modal-content'>";
+									echo "<div class='w3-container'>";
+										echo "<span onclick='closeClientModal(" . $clientID . ")' class='w3-button w3-display-topright'>&times;</span>";
+										echo "<p> Addresses for " . $clientID ." " . $clientFName . " " . $clientLName . "</p>";
+										
+										$clientAddressSQL = "SELECT `clients`.`ID` AS `clientsID`, ";
+										$clientAddressSQL .= "`addresses`.`ID` AS `addID`, `addresses`.*, ";
+										$clientAddressSQL .= "`client_addresses`.`ID` AS `clientAddId`, `client_addresses`.* ";
+										$clientAddressSQL .= "FROM `clients` ";
+										$clientAddressSQL .= "LEFT JOIN `client_addresses` ON `client_addresses`.`client_id` = `clients`.`ID` ";
+										$clientAddressSQL .= "LEFT JOIN `addresses` ON `client_addresses`.`address_id` = `addresses`.`ID` ";
+										$clientAddressSQL .= "WHERE `clients`.`ID` = " . $clientID;
+										
+										// echo $clientAddressSQL;
+										
+										$clientAddressResult = mysqli_query($db, $clientAddressSQL) or die (mysqli_error($db));
+										
+										while ($clientAddressRow = mysqli_fetch_array($clientAddressResult)) {
+											
+											$addID = $clientAddressRow["addID"];
+											$clientsID = $clientAddressRow["clientsID"];
+											$clientAddID = $clientAddressRow["clientAddId"];
+											$addStreet1 = $clientAddressRow["Street1"];
+											$addStreet2 = $clientAddressRow["Street2"];
+											$addCity = $clientAddressRow["City"];
+											$addState = $clientAddressRow["State"];
+											$addZip = $clientAddressRow["ZIP"];
+											$addCountry = $clientAddressRow["Country"];
+											
+											echo "<table class='w3-table'>";
+												echo "<tr>";
+													echo "<td>";
+														echo "Address ID";
+													echo "</td>";
+													echo "<td>";
+														echo $addID;
+													echo "</td>";
+												echo "</tr>";
+												echo "<tr>";
+													echo "<td>";
+														echo "Street 1";
+													echo "</td>";
+													echo "<td>";
+														echo $addStreet1;
+													echo "</td>";
+												echo "</tr>";
+												echo "<tr>";
+													echo "<td>";
+														echo "Street 2";
+													echo "</td>";
+													echo "<td>";
+														echo $addStreet2;
+													echo "</td>";
+												echo "</tr>";
+												echo "<tr>";
+													echo "<td>";
+														echo "City";
+													echo "</td>";
+													echo "<td>";
+														echo $addCity;
+													echo "</td>";
+												echo "</tr>";
+												echo "<tr>";
+													echo "<td>";
+														echo "State";
+													echo "</td>";
+													echo "<td>";
+														echo $addState;
+													echo "</td>";
+												echo "</tr>";
+												echo "<tr>";
+													echo "<td>";
+														echo "Zip Code";
+													echo "</td>";
+													echo "<td>";
+														echo $addZip;
+													echo "</td>";
+												echo "</tr>";
+												echo "<tr>";
+													echo "<td>";
+														echo "Country";
+													echo "</td>";
+													echo "<td>";
+														echo $addCountry;
+													echo "</td>";
+												echo "</tr>";												
+											echo "</table>";
+											
+										}
+										
+									echo "</div>";
+								echo "</div>";
+							echo "</div>";
+

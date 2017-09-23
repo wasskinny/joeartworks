@@ -26,6 +26,15 @@
 		document.getElementById($modalID).style.display = "none";
 	}
 	
+	function openClientModal($clientID) {
+		$clientModalID = $clientID;
+		document.getElementById($clientModalID).style.display='block';		
+	}
+	
+	function closeClientModal($clientID) {
+		$clientModalID = $clientID;
+		document.getElementById($clientModalID).style.display='none';
+	}
 	
 	
 	
