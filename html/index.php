@@ -9,6 +9,7 @@
 				
 	//Include database configuration file
 	include('configs/dbConfig.php');
+	include('configs/siteSet.php');
 						
 ?>
 
@@ -38,6 +39,7 @@
 				<div class="inner">
 					<div class="columns">
 						
+								
 						<?php
 						
 							//Get images from database
@@ -59,7 +61,7 @@
 										$imgName = $row["img_name"];
 										$imgDescription = $row["description"];
 										
-										echo "<form id='subImageForm' action='detail1.php' method='post'>";
+										echo "<form id='subImageForm' action='gallery.php' method='post'>";
 										echo "<input type='hidden' name='imgID' value='" . $imgID . "' />";
 										echo "<input type='hidden' name='imgURL' value='" . $imageURL . "' />";
 										echo "<div class='image fit' id='selectImage'>";
@@ -72,7 +74,7 @@
 										
 						?>
 						
-						<form action='detail1.php' method="post">
+						
 						
 					</div>
 				</div>
