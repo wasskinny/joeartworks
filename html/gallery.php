@@ -17,7 +17,13 @@
 		
 		
 		$nextImgSQL = "SELECT id, img_name FROM images WHERE id = (SELECT min(id) FROM images WHERE id > " . $firstImg . ")";
-		$nextImgResult = mysqli_fetch_assoc(mysqli_query($db, $nextImgSQL)) or die('Unable to execute query NextImg. '. mysqli_error($db));
+		$nextImgQuery = mysqli_query($db, $nextImgSQL);
+		
+		if($nextImgQuery->num_rows === 0) {
+			$firstImgSQL = "SELECT id, img_name FROM images ORDER BY id ASC LIMIT 1";
+			$nextImgQuery = mysqli_query($db, $firstImgSQL);
+		}
+		$nextImgResult = mysqli_fetch_assoc($nextImgQuery);
 		$nextImg = $nextImgResult['id'];
 		$nextImgName = $nextImgResult['img_name'];
 		$nextImgURL = "images/fullsized/" . $nextImgName;
@@ -26,7 +32,14 @@
 				
 			
 		$previousImgSQL = "SELECT id, img_name FROM images WHERE id = (SELECT max(id) FROM images WHERE id < " . $firstImg . ")";
-		$previousImgResult = mysqli_fetch_assoc(mysqli_query($db, $previousImgSQL)) or die('Unable to execute query PreviousImg. '. mysqli_error($db));
+		$previousImgQuery = mysqli_query($db, $previousImgSQL);
+		
+		if($previousImgQuery->num_rows === 0) {
+			$lastImgSQL = "SELECT id, img_name FROM images ORDER BY id DESC LIMIT 1";
+			$previousImgQuery = mysqli_query($db, $lastImgSQL);
+		}
+		$previousImgResult = mysqli_fetch_assoc($previousImgQuery);
+		
 		$previousImg = $previousImgResult['id'];
 		$previousImgName = $previousImgResult['img_name'];
 		$previousImgURL = "images/fullsized/" . $previousImgName;
