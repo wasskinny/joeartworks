@@ -12,10 +12,6 @@
 			
 		}
 		
-		// $gallerySQL = "SELECT * FROM images WHERE id = " . $firstImg. " ";
-		// $gallerySQL .= "LEFT JOIN categories on images.category_id=categories.id";
-		
-		
 		$nextImgSQL = "SELECT id, img_name FROM images WHERE id = (SELECT min(id) FROM images WHERE id > " . $firstImg . ")";
 		$nextImgQuery = mysqli_query($db, $nextImgSQL);
 		
@@ -23,6 +19,7 @@
 			$firstImgSQL = "SELECT id, img_name FROM images ORDER BY id ASC LIMIT 1";
 			$nextImgQuery = mysqli_query($db, $firstImgSQL);
 		}
+
 		$nextImgResult = mysqli_fetch_assoc($nextImgQuery);
 		$nextImg = $nextImgResult['id'];
 		$nextImgName = $nextImgResult['img_name'];
@@ -38,8 +35,8 @@
 			$lastImgSQL = "SELECT id, img_name FROM images ORDER BY id DESC LIMIT 1";
 			$previousImgQuery = mysqli_query($db, $lastImgSQL);
 		}
+
 		$previousImgResult = mysqli_fetch_assoc($previousImgQuery);
-		
 		$previousImg = $previousImgResult['id'];
 		$previousImgName = $previousImgResult['img_name'];
 		$previousImgURL = "images/fullsized/" . $previousImgName;
@@ -65,7 +62,7 @@
 						<h1>Joe's Art Works</h1>
 						<h2></h2>
 					</div>
-					<a href="index.php" class="button hidden"><span>Let's Go</span></a>
+					<a href="index.php" class="button hidden"><span>Take A Look</span></a>
 				</div>
 			</header>
 
@@ -76,10 +73,31 @@
 						<?php echo "<img src='" . $firstURL . "' alt='' />" ?>
 					</div>
 					<div class="content">
-						<header>
-							<h2>Joe's the Man</h2>
-						</header>
-						<p>Stuff about Joe</p>
+						<?php
+						
+						// Photo Information
+						
+						$imageInfoSQL = "SELECT * FROM images ";
+						$imageInfoSQL .= "WHERE images.id = " . $firstImg;
+						
+						// echo "This is the SQL for imageInfoSQL " . $imageInfoSQL . "<br />";
+
+						$imageInfoQuery = mysqli_query($db, $imageInfoSQL);
+						$imageInfoResult = mysqli_fetch_assoc($imageInfoQuery);
+						
+						$imageID = $imageInfoResult['id'];
+						$imageName = $imageInfoResult['img_name'];
+						$imageTitle = $imageInfoResult['title'];
+						$imageDescription = $imageInfoResult['description'];
+						
+						echo "<div class='titlebox'>";
+						echo "<header>";
+						echo "	<h2>" . $imageTitle . "</h2>";
+						echo "</header>";
+						echo "<p>" . $imageDescription . "</p>";
+						echo "</div>";
+						
+						?>
 					</div>
 				</div>
 				

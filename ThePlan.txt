@@ -9,6 +9,8 @@ X	Add Photos (I want to add photos first so we can add multiple photos)
 	Add and Edit Categories
 		Add Category by typing it into Edit Photo form?
 		More than one category?
+			I have created the database structure for multiple categories.
+			Rebuild Category entry
 	
 	The folks who buy photos.
 		There will need to be a captcha form in public for buyers to register.

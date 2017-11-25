@@ -9,11 +9,15 @@
 		if (isset($_POST["newID"])) {
 		
 			$newID = $_POST["newID"];
+			$newTitle = $_POST["newTitle"];
 			$newDescription = $_POST["newDescription"];
 			
 			$newSQL =  "UPDATE images SET ";
+			$newSQL .= "title = '" . $newTitle . "', ";
 			$newSQL .= "Description = '" . $newDescription . "' ";
 			$newSQL .= "WHERE Id = '" . $newID . "'";
+			
+			// echo "New SQL = " . $newSQL . "<br />";
 			
 			$updateResult = mysqli_query($db, $newSQL);
 			
@@ -58,9 +62,9 @@
 			
 			$newCategory = $_POST["newCategory"];
 			
-			$newCatSQL = "UPDATE images SET ";
-			$newCatSQL .= "category_id = '" . $newCategory . "' ";
-			$newCatSQL .= "WHERE Id = '" . $newID . "'";
+			$newCatSQL = "UPDATE image_categories SET ";
+			$newCatSQL .= "categories_id = '" . $newCategory . "' ";
+			$newCatSQL .= "WHERE Image_id = '" . $newID . "'";
 			
 			$categoryResult = mysqli_query($db, $newCatSQL);
 		}
@@ -192,24 +196,26 @@
 						
 					<?php
 						
-						$sqlImages =  "SELECT * FROM images ";
-						$sqlImages .= "LEFT JOIN categories on images.category_id=categories.id";
+						$sqlImages =  "SELECT * FROM images i ";
+						// $sqlImages .= "INNER JOIN image_categories d on i.id = d.image_id ";
+						// $sqlImages .= "INNER JOIN categories c on c.ID = d.categories_id"
 						$sqlImages .= ";";
 						
 						$sqlLoadImages = mysqli_query($db, $sqlImages);
 						$imageCount = 0;
 						
-						$sqlCategories = "SELECT * FROM categories";
-						$sqlLoadCategories = mysqli_query($db, $sqlCategories);
+						// $sqlCategories = "SELECT * FROM categories";
+						// $sqlLoadCategories = mysqli_query($db, $sqlCategories);
 						
 						
 						while ($row = mysqli_fetch_array($sqlLoadImages,MYSQLI_ASSOC)) {
 							
 								$imgID = $row["id"];
 								$imgName = $row["img_name"];
+								$imgTitle = $row["title"];
 								$imgDescription = $row["description"];
 								$imgOriginal = $row["original"];
-								$imgCategory = $row["category"];
+								// $imgCategory = $row["category"];
 								
 								if ($imgOriginal == "1") {
 									$imgOriginal = "checked";
@@ -223,58 +229,82 @@
 											
 									echo '<div class="w3-quarter">';
 									echo '<div class="w3-card-4 w3-center">';										
-									echo "<img src='".$path_to_thumbs.$imgName."' class='middle' alt='" . $imgDescription . "' onclick='photomodal(".$imgID.")' class='w3-hover-opacity' /><br />";
-									echo "<span class='w3-small'>" . $imgDescription . "</span>";
+									echo "<img src='".$path_to_thumbs.$imgName."' class='middle' alt='" . $imgTitle . "' onclick='photomodal(".$imgID.")' class='w3-hover-opacity' /><br />";
+									echo "<span class='w3-small'>" . $imgTitle . "</span>";
 									echo "</div>";
 									echo '<div id="'.$imgID.'" class="w3-modal w3-animate-zoom"  align="center">';
 									echo "<div class='w3-modal-content' >";
 										// echo "<div class='w3-card'>";
 											echo "<header class='w3-container" . $adminHeaderClass . "'>";
 												echo '<span onclick="closePhotoModal('.$imgID.')" class="w3-button w3-display-topright">&times;</span>';
-												echo "<p>" . $imgDescription . "</p>";
+												echo "<p>" . $imgTitle . "</p>";
 											echo "</header>";
 											echo "<div class='w3-container'>";
-											echo "<img src='" . $path_to_images.$imgName . "' style='width:80%'/>";
-											echo "</div>";
-											echo "<form class='w3-container w3-light-grey' name='updatePhotos' action='editPhotos.php' method='post'>";
-											echo "<div class='w3-row-padding w3-border'>";
-												echo "<div class='w3-third'>";
-													echo "<label class='w3-red'>Delete Photo</label><br />";
-													echo "<input class='w3-check' type='checkbox' name='delPhoto' value='delPhoto' >";
-												echo "</div>";	
-												echo "<div class='w3-third '>";
-													echo "<label>Original</label><br />";
-													echo "<input class='w3-check' type='checkbox' name='imgOriginal' value='1' " . $imgOriginal . ">";
+												echo "<div class='w3-container w3-grey w3-cell'>";
+												echo "<img src='" . $path_to_images.$imgName . "' style='width:250px'/>";
 												echo "</div>";
-												echo "<div class='w3-third'>";
-													echo "<label>Category</label>";
-													echo "<select class='w3-select' name='newCategory'>";
-													echo "<option value='' disabled selected>" . $imgCategory . "</option>";
-														
-														$sqlCategories = "SELECT * FROM categories";
-														$sqlLoadCategories = mysqli_query($db, $sqlCategories);
-														
-														while ($catRow = mysqli_fetch_array($sqlLoadCategories,MYSQLI_ASSOC)) {
-															
-															$categoryID = $catRow["ID"];
-															$categoryName = $catRow["category"];
-															
-															echo "<option value='" . $categoryID . "'>" . $categoryName . "</option>";
-															
-														}
-														
-													echo "</select>";
-													echo "<label>Add Category</label>";
-													echo "<input type='text' name='newCatName' value='' />";
+											// echo "</div>";
+											echo "<div class='w3-container w3-cell'>";
+												echo "<form class='w3-container w3-light-grey' name='updatePhotos' action='editPhotos.php' method='post'>";
+												echo "<div class='w3-row-padding w3-border'>";
+													echo "<div class='w3-third'>";
+														echo "<label class='w3-red'>Delete Photo</label><br />";
+														echo "<input class='w3-check' type='checkbox' name='delPhoto' value='delPhoto' >";
+													echo "</div>";	
+													echo "<div class='w3-third '>";
+														echo "<label>Original</label><br />";
+														echo "<input class='w3-check' type='checkbox' name='imgOriginal' value='1' " . $imgOriginal . ">";
+													echo "</div>";
+												echo "</div>";
+												echo "<input type='hidden' name='newID' value='" . $imgID . "'>";
+												echo "<label>Title</label>";
+												echo "<input class='w3-input w3-round-1' type='text' name='newTitle' value='" . $imgTitle . "' />";
+												echo "<label>Description</label>";
+												echo "<input class='w3-input w3-round-1' type='text' name='newDescription' value='" . $imgDescription . "' />";
+												echo "<br />";
+												echo "<button class='w3-submit w3-btn w3-green'>Submit</button>";
+																						
+												echo "</form>";
+												echo "<br />";
+												
+												echo "<div class='w3-row-padding w3-border'>";
+													echo "<div class='w3-row w3-border'";
+													echo "<div class='w3-third'>";
+													// echo "<form id='editCatForm' class='w3-container w3-light-grey w3-form' action='editphots.php' method='post'>";
+													echo "<label>Categories</label>";
+													echo "</div>";
+													echo "<div class='w3-row'>";
+												// Retrieve and display categories
+												
+												$displayCatSQL = "SELECT category FROM images i ";
+												$displayCatSQL .= "JOIN image_categories d on i.id = d.image_id ";
+												$displayCatSQL .= "JOIN categories c on c.ID = d.categories_id ";
+												$displayCatSQL .= "WHERE i.id = " . $imgID;
+												$displayCatSQL .= ";";
+												
+												// echo "displayCatSQL is " . $displayCatSQL . "<br />"; 
+												
+												$displayCatResult = mysqli_query($db, $displayCatSQL);
+												
+												while ($catRow = mysqli_fetch_assoc($displayCatResult)) {
 													
+													$category = $catRow["category"];
+													
+													echo "<div class='w3-third'>";
+													echo "<div class='w3-container'>";
+													echo $category;
+													echo "</div>";
+													echo "</div>";
+													
+												}
+												
+													echo "</div>";
 												echo "</div>";
 											echo "</div>";
-											echo "<input type='hidden' name='newID' value='" . $imgID . "'>";
-											echo "<label>Description</label>";
-											echo "<input class='w3-input w3-round-1' type='text' name='newDescription' value='" . $imgDescription . "' />";
-											echo "<button class='w3-submit w3-btn w3-green'>Submit</button>";
-											
-											echo "</form>";
+											echo "<div class='w3-container'>";
+											echo "<p></p>";
+											echo "</div>";
+											echo "</div>";
 									echo "</div>";
 									echo '</div>';
 									echo '</div>';

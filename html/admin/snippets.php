@@ -126,6 +126,38 @@ $images = scandir($path_to_thumbs);
 	</body>
 </html>
 
+/*  Original Single Category Edit
+												echo "<div class='w3-third'>";
+													echo "<label>Category</label>";
+													echo "<select class='w3-select' name='newCategory'>";
+													echo "<option value='' disabled selected>" . $imgCategory . "</option>";
+														
+														$sqlCategories = "SELECT * FROM categories";
+														$sqlLoadCategories = mysqli_query($db, $sqlCategories);
+														
+														while ($catRow = mysqli_fetch_array($sqlLoadCategories,MYSQLI_ASSOC)) {
+															
+															$categoryID = $catRow["ID"];
+															$categoryName = $catRow["category"];
+															
+															echo "<option value='" . $categoryID . "'>" . $categoryName . "</option>";
+															
+														}
+														
+													echo "</select>";
+													echo "<label>Add Category</label>";
+													echo "<input type='text' name='newCatName' value='' />";
+													
+												echo "</div>";
+*/
+
+echo "<div class='w3-row-padding w3-border>";
+												// echo "<label>";
+													echo "Categories<br />";
+												echo "</div>";
+
+
+
 echo "<div id='" . $clientID . "' class='w3-modal'>";
 								echo "<div class='w3-modal-content'>";
 									echo "<div class='w3-container'>";

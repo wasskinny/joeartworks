@@ -31,7 +31,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `ID` smallint(6) NOT NULL,
   `category` varchar(125) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `image_categories` (
+	`ID` SMALLINT(6) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`image_id` INT(11) NOT NULL,
+	`categories_id` SMALLINT(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories`
@@ -55,7 +61,7 @@ CREATE TABLE `images` (
   `status` enum('1','0') NOT NULL,
   `original` tinyint(4) NOT NULL,
   `category_id` smallint(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `images`
@@ -76,6 +82,9 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`);
+  
+ALTER TABLE `image_categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -85,12 +94,19 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;COMMIT;
+  
+ ALTER TABLE `image_categories`
+   MODIFY `ID` SMALLINT(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+ ALTER TABLE `image_categories`  
+   ADD FOREIGN KEY (`categories_id`) REFERENCES categories (`ID`) ON DELETE CASCADE;
+ ALTER TABLE `image_categories`
+   ADD FOREIGN KEY (`image_id`) REFERENCES images (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
