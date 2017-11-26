@@ -246,7 +246,7 @@
 											// echo "</div>";
 											echo "<div class='w3-container w3-cell'>";
 												echo "<form class='w3-container w3-light-grey' name='updatePhotos' action='editPhotos.php' method='post'>";
-												echo "<div class='w3-row-padding w3-border'>";
+												echo "<div class='w3-row w3-border'>";
 													echo "<div class='w3-third'>";
 														echo "<label class='w3-red'>Delete Photo</label><br />";
 														echo "<input class='w3-check' type='checkbox' name='delPhoto' value='delPhoto' >";

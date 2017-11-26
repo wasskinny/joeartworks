@@ -30,7 +30,8 @@ class Upload {
 								if (!move_uploaded_file($_FILES["img_files"]["tmp_name"][$i], $filepath)) {
 									$msg .= "<p class='msg_error'>Failed to upload <strong>" . $filename . "</strong>.</p>";
 								} else {
-									$sql = "INSERT INTO images (img_name, description, original, category_id) VALUES ('$filename', '$file_name', '1','0') ";
+									$sql = "INSERT INTO images (img_name, description, original, category_id) ";
+									$sql .= "VALUES ('$filename', '$file_name', '1','0') ";
 									$result = $db->query($sql);
 									// echo "The Result is: " . $result . "<br />";
 									$msg .= "<p class='msg_success'><strong>" . $filename . "</strong> uploaded successfully.</p>" ;

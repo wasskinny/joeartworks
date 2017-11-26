@@ -134,14 +134,15 @@
 	<div class="w3-main" >
 			<div class="<?php echo $adminHeaderClass ?>">
 				
-				<div class="w3-container">
-					<h1>Joe's ArtWorks Administration</h1>
+				<div class="w3-container" align="center">
+					<h2>Joe's ArtWorks Administration</h2>
 				</div>
 				
 			</div>
 			<div class="w3-container">
-				<h1>Login</h1> 
+				<h3>Click to Login</h3>
 					<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
+					<p></p>
 		
 					<div id="id01" class="w3-modal">
 						<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width: 600px">
@@ -157,8 +158,8 @@
 									<label>Password</label> 
 									<input class="w3-input w3-border" type="password" name="password" value="" required/> 
 									<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-									<input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
-						<!-- <input type="submit" value="Login" /> -->
+							<!--		<input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+										<input type="submit" value="Login" /> -->
 								</div>
 							</form> 
 							<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
@@ -171,9 +172,9 @@
 	</div>
 </body>
 <footer>
-		<div class="w3-container <?php echo $adminHeaderClass ?>">
+		<div class="w3-container <?php echo $adminHeaderClass ?>" align="center">
 		
-		<p>&copy; 2017 Joe's Artworks, LLC  All Rights Reserved </p>
+		<p>&copy; 2017 Joe's Artworks, LLP  All Rights Reserved </p>
 	
 	</div>
 	</div>

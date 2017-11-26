@@ -38,7 +38,7 @@
 	            	&lozf;
 	            	<a href="purchase.php">Purchase</a>
 	            	&lozf;
-	            	<a href="idontknow.php">More Stuff</a>
+	            	<a href="clientLogin.php">Client Login</a>
 	            	&lozf;
 	            	<a href="admin/">Admin</a>
             	</nav>

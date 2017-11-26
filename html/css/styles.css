@@ -11,18 +11,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 	display: block;
 }
 
-
-.frontmenu a {
-	vertical-align: middle;
-	color: #8f7f4a;
-	text-decoration: none;
-	margin: 15px 15px 10px 15px;
-}
-
-.frontmenu a:hover {
-	color:#cdc38e
-}
-
 p {
     padding: 10px;
 }
@@ -110,6 +98,34 @@ p {
 	transition: .3s;
 }
 
+.frontmenu a {
+	vertical-align: middle;
+	color: #8f7f4a;
+	text-decoration: none;
+	margin: 15px 15px 10px 15px;
+}
+
+.frontmenu a:hover {
+	color:#cdc38e
+}
+
+.aboutTitle {
+	color: #8f7f4a;
+	font-family: cursive;
+	font-size: x-large;
+	text-align: center;
+		
+}
+
+.aboutBody {
+	color: black;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	line-height: 150%;
+	font-size: large;
+	margin: 10px;
+	padding:10px;
+	
+}
 /* Columns */
 
 	.columns {
